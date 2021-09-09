@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 import ProductList from './pages/productList'
 import ProductPayment from './pages/productPayment'
 

@@ -6,9 +6,8 @@ function StripeCardCheckout(props) {
 	const stripe = useStripe()
 	const elements = useElements()
 
-	const handleSubmit = async (event) => {
-		// Block native form submission.
-		event.preventDefault()
+	const handleSubmit = async (e) => {
+		e.preventDefault()
 
 		if (!stripe || !elements) {
 			// Stripe.js has not loaded yet. Make sure to disable
@@ -16,36 +15,19 @@ function StripeCardCheckout(props) {
 			return
 		}
 
-		// Get a reference to a mounted CardElement. Elements knows how
-		// to find your CardElement because there can only ever be one of
-		// each type of element.
-		const cardElement = elements.getElement(CardElement)
-
-		// Use your card Element with other Stripe.js APIs
-		const { error, paymentMethod } = await stripe.createPaymentMethod({
+		const payload = await stripe.createPaymentMethod({
 			type: 'card',
-			card: cardElement
+			card: elements.getElement(CardElement)
 		})
 
-		if (error) {
-			alert(error.message)
-		} else {
-			props.captureStripeTokenResponse(paymentMethod)
-		}
-	}
-
-	const styles = {
-		formStyle: {
-			maxWidth: '500px',
-			width: '100%',
-			margin: '0 auto'
-		}
+		if (!payload.error) props.handleSubmit()
+		else alert(payload.error.message)
 	}
 
 	return createElement(StripeCardCheckoutView, {
-		styles,
-		handleSubmit,
-		stripe
+		stripe,
+		subTotal: props.subTotal.toFixed(2),
+		handleSubmit
 	})
 }
 

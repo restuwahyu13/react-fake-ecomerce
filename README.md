@@ -3,6 +3,16 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Test Card Number
+
+```html
+<li>Card Number: 4242 4242 4242 4242</li>
+<li>Month: 12</li>
+<li>Year: 27</li>
+<li>CVC: 839</li>
+<li>Zip Code: 90210</li>
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
