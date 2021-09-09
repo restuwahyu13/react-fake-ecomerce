@@ -1,5 +1,4 @@
 import { Elements } from '@stripe/react-stripe-js'
-
 import StripeCardCheckout from '../../components/StripeCardCheckout'
 import CartSummaryCard from '../../components/CartSummaryCard'
 
@@ -8,8 +7,8 @@ function PaymentView(props) {
 		props
 
 	return (
-		<div className='App'>
-			<h2>JM React Stripe Project</h2>
+		<>
+			{/* <h2>JM React Stripe Project</h2>
 			<div>
 				<p>
 					The purpose of this project is to test out stripe payments via stripe's
@@ -19,15 +18,14 @@ function PaymentView(props) {
 					</a>
 				</p>
 				<hr />
-			</div>
-
-			<CartSummaryCard
+			</div> */}
+			{/* <CartSummaryCard
 				item_purchase_count={item_purchase_count}
 				transaction_fees={transaction_fees}
 				cart_total={cart_total}
 				stripe_cart_total={stripe_cart_total}
-			/>
-			<div>
+			/> */}
+			{/* <div>
 				<i>Note: Use a sample test card number like so...</i>
 				<ul>
 					<li>Test card number: 4242 4242 4242 4242</li>
@@ -36,14 +34,14 @@ function PaymentView(props) {
 					<li>CVC: 839</li>
 					<li>Zip Code: 90210</li>
 				</ul>
-			</div>
+			</div> */}
 
 			<div>
 				<Elements stripe={stripePromise}>
 					<StripeCardCheckout captureStripeTokenResponse={captureStripeTokenResponse} />
 				</Elements>
 			</div>
-		</div>
+		</>
 	)
 }
 

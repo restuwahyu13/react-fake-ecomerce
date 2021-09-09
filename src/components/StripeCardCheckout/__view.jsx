@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
 import { CardElement } from '@stripe/react-stripe-js'
 
 function StripeCardCheckoutView(props) {
@@ -7,27 +6,46 @@ function StripeCardCheckoutView(props) {
 
 	return (
 		<>
-			<form style={styles.formStyle} onSubmit={handleSubmit} autoComplete='off'>
-				<CardElement
-					options={{
-						style: {
-							base: {
-								'fontSize': '16px',
-								'color': '#424770',
-								'::placeholder': {
-									color: '#aab7c4'
-								}
-							},
-							invalid: {
-								color: '#9e2146'
-							}
-						}
-					}}
-				/>
-				<Button variant='contained' color='primary' type='submit' disabled={!stripe}>
-					CHECKOUT
-				</Button>
-			</form>
+			<div className='container-fluid'>
+				<div class='card'>
+					<div className='card-body p-3'>
+						<form style={styles.formStyle} onSubmit={handleSubmit} autoComplete='off'>
+							<div className='form-group'>
+								<label htmlFor='fullname'> Fullname</label>
+								<input type='text' className='form-control' />
+							</div>
+							<div className='form-group'>
+								<label htmlFor='fullname'> Email</label>
+								<input type='text' className='form-control' />
+							</div>
+							<div className='form-group'>
+								<label htmlFor='fullname'> Credit Card</label>
+								<CardElement
+									options={{
+										style: {
+											base: {
+												'fontSize': '16px',
+												'color': '#424770',
+												'::placeholder': {
+													color: '#aab7c4'
+												}
+											},
+											invalid: {
+												color: '#9e2146'
+											}
+										}
+									}}
+								/>
+							</div>
+							<div className='form-group'>
+								<button className='btn col-12' type='submit' disabled={!stripe} style={{ backgroundColor: '#6772E5' }}>
+									Checkout
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 		</>
 	)
 }
