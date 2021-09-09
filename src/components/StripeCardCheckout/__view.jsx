@@ -16,8 +16,8 @@ function StripeCardCheckoutView(props) {
 							onSubmit={props.handleSubmit}
 							autoComplete='off'>
 							<div className='form-group'>
-								<label htmlFor='fullname'> Fullname</label>
-								<input type='text' name='fullname' className='form-control' />
+								<label htmlFor='email'>Email</label>
+								<input type='email' name='email' className='form-control' onChange={props.handleChange} required />
 							</div>
 							<div className='form-group'>
 								<label htmlFor='fullname'> Credit Card</label>
@@ -39,8 +39,11 @@ function StripeCardCheckoutView(props) {
 								/>
 							</div>
 							<div className='form-group'>
-								<button className='btn col-12' type='submit' disabled={!props.stripe} style={{ backgroundColor: '#6772E5' }}>
-									Pay ${props.subTotal}
+								<button className='btn col-12' type='submit' style={{ backgroundColor: '#6772E5' }} disabled={props.disabled}>
+									{props.disabled !== true && `Pay $${props.subTotal}`}
+									{props.disabled !== false && (
+										<div class='spinner-border text-light' style={{ fontSize: 14, textAlign: 'center', padding: 5 }} />
+									)}
 								</button>
 							</div>
 						</form>

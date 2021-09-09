@@ -1,10 +1,13 @@
-import { createElement } from 'react'
+import { createElement, useState } from 'react'
+import { withRouter } from 'react-router-dom'
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import StripeCardCheckoutView from './__view'
 
 function StripeCardCheckout(props) {
 	const stripe = useStripe()
 	const elements = useElements()
+
+	const [disabled, setDisabled] = useState(false)
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -20,15 +23,23 @@ function StripeCardCheckout(props) {
 			card: elements.getElement(CardElement)
 		})
 
-		if (!payload.error) props.handleSubmit()
-		else alert(payload.error.message)
+		if (!payload.error) {
+			setDisabled(true)
+			setTimeout(() => {
+				localStorage.clear()
+				props.handleSubmit(payload.id)
+				props.history.push('/')
+			}, 2000)
+		} else alert(payload.error.message)
 	}
 
 	return createElement(StripeCardCheckoutView, {
 		stripe,
 		subTotal: props.subTotal.toFixed(2),
+		handleChange: props.handleChange,
+		disabled,
 		handleSubmit
 	})
 }
 
-export default StripeCardCheckout
+export default withRouter(StripeCardCheckout)

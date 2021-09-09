@@ -6,7 +6,7 @@ function PaymentView(props) {
 	return (
 		<Fragment>
 			<Elements stripe={props.stripePromise}>
-				<StripeCardCheckout handleSubmit={props.handleSubmit} subTotal={props.subTotal} />
+				<StripeCardCheckout handleSubmit={props.handleSubmit} handleChange={props.handleChange} subTotal={props.subTotal} />
 			</Elements>
 		</Fragment>
 	)
